@@ -1,0 +1,26 @@
+---
+- name: Installing , Editing, Restarting and Status Checking apache2
+  hosts: all
+  tasks:
+  - name: Install apache2
+    apt:
+     name: apache2
+     state: present
+     update_cache: yes
+  - name: Edit the welcome page 
+    copy:
+     content: "Hello World, Welcome to our HTML Page"
+     dest: /var/www/html/index.html
+  - name: Restarting the apache2 service
+    service:
+     name: apache2
+     state: restarted
+  - name: Checking status of apache2 on host1
+    uri:
+     url: http://172.31.7.17:80
+     status_code: 200
+  - name: checking status of apache2 on host2
+    uri:
+     url: http://172.31.15.162:80
+     status_code: 200
+...

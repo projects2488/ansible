@@ -1,0 +1,10 @@
+---
+- name: Installing git on Managed Hosts
+  hosts: all
+  tasks:
+  - name: Install git 
+    apt:
+     name: git
+     state: present
+     update_cache: yes
+...

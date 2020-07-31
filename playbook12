@@ -1,0 +1,37 @@
+---
+- name: Install Tomcat8,tomcat8-admin,copy tomcat-users.xml file, change port, change content, restart service and check url response
+  hosts: all
+  tasks:
+   - name: Install tomcat8 and tomcat8-admin
+     apt:
+      name: "{{item.a}}"      
+      state: "{{item.b}}"
+      update_cache: "{{item.c}}"
+     with_items:
+      - {a: tomcat8, b: present, c: yes}
+      - {a: tomcat8-admin, b: present, c: yes}
+   - name: Copy users.xml file to managed hosts
+     copy:
+      src: /home/ubuntu/tomcat-users.xml
+      dest: /etc/tomcat8
+   - name: Changing the port number
+     replace:
+      regexp: 8080
+      replace: 9090
+      path: /etc/tomcat8/server.xml
+   - name: Changing the content of welcomepage
+     copy:
+      content: "Welcome to Tomcat8 homepage"
+      dest: /var/lib/tomcat8/webapps/ROOT/index.html
+   - name: Restarting the service
+     service: 
+      name: tomcat8
+      state: restarted
+   - name: checking url is reachable or not
+     uri:
+      url: "{{item.a}}"
+      status_code: "{{item.b}}"
+     with_items:
+      - {a: "http://13.127.50.131:9090", b: 200}
+      - {a: "http://15.207.55.237:9090", b: 200}
+...

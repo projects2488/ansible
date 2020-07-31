@@ -1,0 +1,20 @@
+---
+- name: Uninstall software packages git tree and maven
+  hosts: all
+  tasks:
+   - name: uninstall git
+     apt:
+      name: git
+      state: absent
+      update_cache: yes
+   - name: uninstall tree
+     apt:
+      name: tree
+      state: absent
+      update_cache: yes
+   - name: uninstall maven
+     apt:
+      name: maven
+      state: absent
+      update_cache: yes
+...

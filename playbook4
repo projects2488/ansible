@@ -1,0 +1,28 @@
+---
+- name: Creating a new user in all Managed Host 3
+  hosts: 172.31.15.162
+  tasks:
+   - name: Create User
+     user:
+      name: res1
+      password: hello1
+      comment: 'a single user'
+      uid: 4011
+      home: /home/res1
+      shell: /bin/bash
+- name: Creating a new userin Managed Host2
+  hosts: 172.31.7.17
+  tasks:
+   - name: Creating a user
+     user: 
+      name: res2
+      password: hello2
+      comment: 'a normal user'
+      uid: 4012
+      home: /home/res2
+      shell: /bin/bash
+   - name: Creating a file in the user's home directory
+     file:
+      name: /home/res2/file1
+      state: touch
+...

@@ -1,0 +1,16 @@
+---
+- name: Fetch File2host2 from Managed Node 1 to Controller Machine
+  hosts: 172.31.7.17
+  tasks: 
+   - name: Fetch file
+     fetch:
+      src: /home/ubuntu/filetohost2
+      dest: /home/ubuntu
+- name: Copy file from controller to Managed Host2
+  hosts: 172.31.15.162
+  tasks: 
+   - name: Copy file into Managed Node2
+     copy:
+      src: /home/ubuntu/172.31.7.17/home/ubuntu/filetohost2
+      dest: /tmp
+...

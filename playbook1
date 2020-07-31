@@ -1,0 +1,10 @@
+---
+- name: Install Tree on Managed Hosts
+  hosts: all
+  tasks:
+  - name: Install Tree
+    apt:
+     name: tree
+     state: present
+     update_cache: yes
+...

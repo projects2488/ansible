@@ -1,0 +1,10 @@
+---
+- name: Playbook to remove softwares from system
+  hosts: all
+  tasks:
+   - name: Uninstall list of softwares
+     apt:
+      name: ['tree', 'git', 'maven']
+      state: absent
+      update_cache: yes
+...

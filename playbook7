@@ -1,0 +1,12 @@
+---
+- name: creating files using host scope variables
+  hosts: 172.31.15.162
+  tasks:
+  - name: creating a file using file module
+    file:
+     name: "{{a}}"
+     state: "{{b}}"
+     owner: "{{c}}"
+     group: "{{d}}"
+     mode: "{{e}}"
+...
