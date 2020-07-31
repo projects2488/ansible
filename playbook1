@@ -2,7 +2,7 @@
 - name: Install Tree on Managed Hosts
   hosts: all
   tasks:
-  - name: Install Tree
+  - name: Install Tree on managed nodes
     apt:
      name: tree
      state: present
